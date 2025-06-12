@@ -1,13 +1,14 @@
-import './App.css'
-import Dashboard from './pages/Dashboard'
+import "./App.css";
+import Dashboard from "./pages/Dashboard";
+import AddProductForm from "./components/AddProductForm";
 
 function App() {
-  
   return (
     <>
-      <Dashboard/>
+      <Dashboard />
+      <AddProductForm></AddProductForm>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
