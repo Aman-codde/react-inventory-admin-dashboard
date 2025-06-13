@@ -1,0 +1,36 @@
+.sidebar {
+    flex: 0 0 250px;  /* Fixed width sidebar */
+    background-color: #1e293b; /* Dark slate-blue background */
+    color: white;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.menuItem {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1rem;
+  padding: 1rem;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.menuItem:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* subtle hover effect */
+  }
+
+.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
