@@ -26,6 +26,7 @@ const AddProductForm = () => {
       <form onSubmit={handleSubmit}>
         <input
           className="formEle"
+          no
           type="text"
           name="name"
           placeholder="Name"
