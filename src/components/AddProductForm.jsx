@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./AddProductForm.css";
 
 const AddProductForm = () => {
   const [formData, setformData] = useState({
@@ -17,7 +18,7 @@ const AddProductForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    alert("submitted");
+    alert("Your Data Is Submitted Successfully!");
   };
 
   return (
@@ -37,7 +38,7 @@ const AddProductForm = () => {
           name="category"
           value={formData.category}
           onChange={handleChange}
-          style={{ width: "100%" }}
+          style={{ width: "90%" }}
         >
           <option value="">Select Category</option>
           <option value="Electronics">Electronics</option>
@@ -52,6 +53,7 @@ const AddProductForm = () => {
           placeholder="Price"
           value={formData.price}
           onChange={handleChange}
+          min="0"
         ></input>
         <br></br>
         <input
@@ -61,6 +63,11 @@ const AddProductForm = () => {
           placeholder="Stock"
           value={formData.stock}
           onChange={handleChange}
+          min="0"
+          //   git
+          //   push
+          //   origin
+          //   sk-add-product-form
         ></input>
         <br></br>
         <button type="submit" className="btn">
