@@ -49,8 +49,3 @@ A React-based admin dashboard to manage product inventory — built over a weeke
 ## Visualization
 
 The dashboard leverages Recharts to display product stock status and category breakdowns via interactive charts, helping admins quickly assess inventory.
-
-## 🤝 Collaborators
-
-- [Amandeep Benipal](https://github.com/Aman-codde)  
-- [Teammate Name](https://github.com/teammateusername)
