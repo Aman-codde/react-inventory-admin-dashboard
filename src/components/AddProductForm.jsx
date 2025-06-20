@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./AddProductForm.css";
+import styles from "./AddProductForm.module.css";
 
 const AddProductForm = () => {
   const [formData, setformData] = useState({
@@ -25,7 +25,7 @@ const AddProductForm = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <input
-          className="formEle"
+          className={styles.formEle}
           no
           type="text"
           name="name"
@@ -35,7 +35,7 @@ const AddProductForm = () => {
         ></input>
         <br></br>
         <select
-          className="formEle"
+          className={styles.formEle}
           name="category"
           value={formData.category}
           onChange={handleChange}
@@ -48,7 +48,7 @@ const AddProductForm = () => {
         </select>
         <br></br>
         <input
-          className="formEle"
+          className={styles.formEle}
           type="number"
           name="price"
           placeholder="Price"
@@ -58,20 +58,16 @@ const AddProductForm = () => {
         ></input>
         <br></br>
         <input
-          className="formEle"
+          className={styles.formEle}
           type="number"
           name="stock"
           placeholder="Stock"
           value={formData.stock}
           onChange={handleChange}
           min="0"
-          //   git
-          //   push
-          //   origin
-          //   sk-add-product-form
         ></input>
         <br></br>
-        <button type="submit" className="btn">
+        <button type="submit" className={styles.btn}>
           Add Product
         </button>
       </form>
