@@ -1,0 +1,15 @@
+:root {
+    --color-primary-bg: #1e293b;
+    --color-hover-bg: rgba(255, 255, 255, 0.1);
+    --color-active-bg: rgba(255, 255, 255, 0.2);
+    --color-border: #ccc;
+    --color-text-light: white;
+    --font-family: 'Roboto', Arial, sans-serif;
+  
+    --sidebar-width: 250px;
+    --radius: 6px;
+    --font-size: 16px;
+    --padding: 10px;
+    --spacing: 1rem;
+  }
+  

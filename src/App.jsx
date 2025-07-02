@@ -1,5 +1,7 @@
 import "./App.css";
 import Dashboard from "./pages/Dashboard";
+import './styles/theme.css';
+
 
 function App() {
   
