@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./AddProductForm.module.css";
+import common from '../styles/common.module.css';
 
 const AddProductForm = () => {
   const [formData, setformData] = useState({
@@ -23,9 +24,10 @@ const AddProductForm = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <h2 className={common.heading}>Add New Product</h2>
+      <form onSubmit={handleSubmit} className={styles.formWrapper}>
         <input
-          className={styles.formEle}
+          className={common.formInput}
           no
           type="text"
           name="name"
@@ -33,22 +35,19 @@ const AddProductForm = () => {
           value={formData.name}
           onChange={handleChange}
         ></input>
-        <br></br>
         <select
-          className={styles.formEle}
+          className={common.formInput}
           name="category"
           value={formData.category}
           onChange={handleChange}
-          style={{ width: "90%" }}
         >
           <option value="">Select Category</option>
           <option value="Electronics">Electronics</option>
           <option value="Furniture">Furniture</option>
           <option value="Clothing">Clothing</option>
         </select>
-        <br></br>
         <input
-          className={styles.formEle}
+          className={common.formInput}
           type="number"
           name="price"
           placeholder="Price"
@@ -56,9 +55,8 @@ const AddProductForm = () => {
           onChange={handleChange}
           min="0"
         ></input>
-        <br></br>
         <input
-          className={styles.formEle}
+          className={common.formInput}
           type="number"
           name="stock"
           placeholder="Stock"
@@ -66,8 +64,7 @@ const AddProductForm = () => {
           onChange={handleChange}
           min="0"
         ></input>
-        <br></br>
-        <button type="submit" className={styles.btn}>
+        <button type="submit" className={common.primaryButton}>
           Add Product
         </button>
       </form>
