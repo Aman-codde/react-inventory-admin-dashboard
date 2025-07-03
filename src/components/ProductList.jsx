@@ -1,16 +1,31 @@
-import React, { useState } from "react";
-import products from "../data/products_data";
+import React, { useState, useMemo } from "react";
+import useProducts from "../hooks/useProducts";
 
 const ProductList = () => {
+  const { products, loading, error } = useProducts();
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
 
-  const filteredProducts = products.filter((product) =>
-    product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  const sortedProducts = [...filteredProducts].sort((a, b) =>
-    sortOrder === "asc" ? a.price - b.price : b.price - a.price
-  );
+  const filteredProducts = useMemo(() => {
+    if (!products) return [];
+    return products.filter((product) =>
+      product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [products, searchTerm]);
+
+  const sortedProducts = useMemo(() => {
+    return [...filteredProducts].sort((a, b) =>
+      sortOrder === "asc" ? a.price - b.price : b.price - a.price
+    );
+  }, [filteredProducts, sortOrder]);
+
+  if (loading) {
+    return <div style={{ padding: "20px", textAlign: "center" }}>Loading products...</div>;
+  }
+
+  if (error) {
+    return <div style={{ padding: "20px", textAlign: "center", color: "red" }}>Error fetching products: {error}</div>;
+  }
 
   return (
     <div style={{ padding: "20px" }}>
