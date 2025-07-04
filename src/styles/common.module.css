@@ -1,0 +1,62 @@
+.cardWrapper {
+  padding: 2rem;
+  background-color: #f9fafb;
+  border-radius: var(--radius);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.formInput {
+  padding: var(--padding);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: var(--font-size);
+  background-color: white;
+  width: 100%;
+  box-sizing: border-box;
+}
+  /* Primary Form Button */
+  .primaryButton {
+    font-weight: bold;
+    padding: 10px 20px;
+    background-color: var(--color-primary-bg);;
+    color: var(--color-text-light);
+    border: none;
+    border-radius: var(--radius);
+    font-size: var(--font-size);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .primaryButton:hover {
+    background-color: var(--color-hover-bg);
+  }
+  /* Section Heading */
+  .heading {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Button Group Layout */
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+  }
+  
+  /* Outlined Buttons */
+  .buttonContainer button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1.5px solid var(--color-primary-bg);
+    background-color: white;
+    color: var(--color-primary-bg);
+    border-radius: var(--radius);
+    transition: background-color 0.3s ease;
+  }
+  
+  .buttonContainer button:hover {
+    background-color: var(--color-primary-bg);
+    color: white;
+  }

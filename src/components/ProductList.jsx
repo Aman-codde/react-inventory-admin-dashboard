@@ -1,48 +1,44 @@
 import React, { useState } from "react";
 import products from "../data/products_data";
+import styles from './ProductList.module.css';
+import common from '../styles/common.module.css';
 
 const ProductList = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
 
-  const filteredProducts = products.filter((product) =>
+  const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
   const sortedProducts = [...filteredProducts].sort((a, b) =>
     sortOrder === "asc" ? a.price - b.price : b.price - a.price
   );
 
   return (
-    <div style={{ padding: "20px" }}>
-      <input
-        type="text"
-        placeholder="Search items..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        style={{ marginBottom: "1rem", padding: "0.5rem", width: "200px" }}
-      />
-
-      <select
-        style={{
-          padding: "10px",
-          marginBottom: "1rem",
-          padding: "0.5rem",
-          width: "200px",
-          margin: "5px",
-        }}
-        value={sortOrder}
-        onChange={(e) => setSortOrder(e.target.value)}
-      >
-        <option value="asc">Price: Low to High</option>
-        <option value="desc">Price: High to Low</option>
-      </select>
-
+    <div className={common.cardWrapper}>
       <h2>Inventory Products</h2>
-      <table
-        border="1"
-        cellPadding="10"
-        style={{ width: "100%", borderCollapse: "collapse" }}
-      >
+
+      <div className={styles.controls}>
+        <input
+          type="text"
+          placeholder="Search items..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className={`${common.formInput} ${styles.flexGrow}`}
+        />
+
+        <select
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+          className={`${common.formInput} ${styles.selectOverride}`}
+        >
+          <option value="asc">Price: Low to High</option>
+          <option value="desc">Price: High to Low</option>
+        </select>
+      </div>
+
+      <table className={styles.table}>
         <thead>
           <tr>
             <th>Name</th>
