@@ -7,8 +7,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import products from "../data/products_data";
-
+import useProducts from "../hooks/useProducts";
 const COLORS = [
   "#0088FE",
   "#00C49F",
@@ -19,7 +18,10 @@ const COLORS = [
   "#00E396",
   "#775DD0",
 ];
+
 const PieChart = () => {
+  const { products } = useProducts();
+
   return (
     <ResponsiveContainer width="100%" height={360}>
       <ReactPieChart>
