@@ -9,12 +9,15 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-//import products from "../data/products_data";
+import useProducts from "../hooks/useProducts";
 
-const LineChart = () => (
-  <ResponsiveContainer width="100%" height={360}>
-    <ReactLineChart data={products}>
-      <CartesianGrid strokeDasharray="3 3" />
+const LineChart = () => {
+  const { products } = useProducts();
+
+  return (
+    <ResponsiveContainer width="100%" height={360}>
+      <ReactLineChart data={products}>
+        <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />
@@ -24,5 +27,5 @@ const LineChart = () => (
     </ReactLineChart>
   </ResponsiveContainer>
 );
-
+}
 export default LineChart;

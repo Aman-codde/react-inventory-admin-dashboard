@@ -9,12 +9,15 @@ import {
   Cell,
   ResponsiveContainer,
 } from "recharts";
-//import products from "../data/products_data";
+import useProducts from "../hooks/useProducts";
 
 const LOW_STOCK_THRESHOLD = 2000;
-const ChartView = () => (
-  <ResponsiveContainer width="100%" height={300}>
-    <BarChart data={products}>
+const ChartView = () => {
+  const { products } = useProducts();
+
+  return (
+    <ResponsiveContainer width="100%" height={300}>
+      <BarChart data={products}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />
@@ -32,4 +35,5 @@ const ChartView = () => (
     </BarChart>
   </ResponsiveContainer>
 );
+}
 export default ChartView;
