@@ -9,7 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import products from "../data/products_data";
+//import products from "../data/products_data";
 
 const LineChart = () => (
   <ResponsiveContainer width="100%" height={360}>

@@ -1,20 +1,35 @@
-import products from "../data/products_data";
+
 import styles from './ProductList.module.css';
 import common from '../styles/common.module.css';
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import useProducts from "../hooks/useProducts";
 
 const ProductList = () => {
   const { products, loading, error } = useProducts();
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
+  const [productList, setProductList] = useState([]);
+
+  useEffect(() => {
+    if (products) {
+      setProductList(products);
+    }
+  }, [products]);
+
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this product?");
+    if (confirmDelete) {
+      setProductList((prev) => prev.filter((p) => p.id !== id));
+    }
+  };
+
 
   const filteredProducts = useMemo(() => {
-    if (!products) return [];
-    return products.filter((product) =>
+    if (!productList) return [];
+    return productList.filter((product) =>
       product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  }, [products, searchTerm]);
+  }, [productList, searchTerm]);
 
   const sortedProducts = useMemo(() => {
     return [...filteredProducts].sort((a, b) =>
@@ -59,6 +74,7 @@ const ProductList = () => {
             <th>Name</th>
             <th>Price ($)</th>
             <th>Stock</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -68,6 +84,11 @@ const ProductList = () => {
                 <td>{product.name}</td>
                 <td>{product.price}</td>
                 <td>{product.stock}</td>
+                <td>
+                  <button onClick={() => handleDelete(product.id)}>
+                    Delete
+                  </button>
+                </td>
               </tr>
             ))
           ) : (

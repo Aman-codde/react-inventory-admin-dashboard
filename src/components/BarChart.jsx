@@ -9,7 +9,7 @@ import {
   Cell,
   ResponsiveContainer,
 } from "recharts";
-import products from "../data/products_data";
+//import products from "../data/products_data";
 
 const LOW_STOCK_THRESHOLD = 2000;
 const ChartView = () => (

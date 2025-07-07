@@ -7,7 +7,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import products from "../data/products_data";
+//import products from "../data/products_data";
 
 const COLORS = [
   "#0088FE",
