@@ -1,6 +1,5 @@
-
-import styles from './ProductList.module.css';
-import common from '../styles/common.module.css';
+import styles from "./ProductList.module.css";
+import common from "../styles/common.module.css";
 import React, { useState, useMemo, useEffect } from "react";
 import useProducts from "../hooks/useProducts";
 
@@ -11,15 +10,23 @@ const ProductList = () => {
   const [productList, setProductList] = useState([]);
   const [editingProductId, setEditingProductId] = useState(null);
   const [editForm, setEditForm] = useState({name: '', price: '', stock: ''});
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
     if (products) {
       setProductList(products);
     }
   }, [products]);
+  // Gather unique categories for the dropdown
+  const categories = useMemo(() => {
+    const cats = productList.map((p) => p.category).filter(Boolean);
+    return ["All", ...Array.from(new Set(cats))];
+  }, [productList]);
 
   const handleDelete = (id) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this product?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this product?"
+    );
     if (confirmDelete) {
       setProductList((prev) => prev.filter((p) => p.id !== id));
     }
@@ -27,10 +34,16 @@ const ProductList = () => {
 
   const filteredProducts = useMemo(() => {
     if (!productList) return [];
-    return productList.filter((product) =>
-      product.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [productList, searchTerm]);
+
+    return productList
+      .filter(
+        (product) =>
+          selectedCategory === "All" || product.category === selectedCategory
+      )
+      .filter((product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+  }, [productList, selectedCategory, searchTerm]);
 
   const sortedProducts = useMemo(() => {
     return [...filteredProducts].sort((a, b) =>
@@ -84,11 +97,19 @@ const ProductList = () => {
   }
 
   if (loading) {
-    return <div style={{ padding: "20px", textAlign: "center" }}>Loading products...</div>;
+    return (
+      <div style={{ padding: "20px", textAlign: "center" }}>
+        Loading products...
+      </div>
+    );
   }
 
   if (error) {
-    return <div style={{ padding: "20px", textAlign: "center", color: "red" }}>Error fetching products: {error}</div>;
+    return (
+      <div style={{ padding: "20px", textAlign: "center", color: "red" }}>
+        Error fetching products: {error}
+      </div>
+    );
   }
 
   return (
@@ -111,6 +132,17 @@ const ProductList = () => {
         >
           <option value="asc">Price: Low to High</option>
           <option value="desc">Price: High to Low</option>
+        </select>
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+          className={`${common.formInput} ${styles.selectOverride}`}
+        >
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>
+              {cat}
+            </option>
+          ))}
         </select>
       </div>
 
