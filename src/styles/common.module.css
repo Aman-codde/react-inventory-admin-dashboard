@@ -18,17 +18,27 @@
   .primaryButton {
     font-weight: bold;
     padding: 10px 20px;
-    background-color: var(--color-primary-bg);;
+    background-color: var(--color-primary-bg);
     color: var(--color-text-light);
     border: none;
     border-radius: var(--radius);
     font-size: var(--font-size);
     cursor: pointer;
     transition: background-color 0.2s ease;
+    margin-right: 8px;
+    margin-bottom: 8px;
+  }
+
+  /* Remove margin on last button in a row */
+  .primaryButton:last-child {
+    margin-right: 0px;
+    margin-bottom: 0px;
   }
   
   .primaryButton:hover {
     background-color: var(--color-hover-bg);
+    color: var(--color-primary-bg);
+    border: 2px solid var(--color-primary-bg);
   }
   /* Section Heading */
   .heading {
