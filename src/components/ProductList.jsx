@@ -157,6 +157,22 @@ const ProductList = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div style={{ padding: "20px", textAlign: "center" }}>
+        Loading products...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div style={{ padding: "20px", textAlign: "center", color: "red" }}>
+        Error fetching products: {error}
+      </div>
+    );
+  }
+
   return (
     <div className={common.cardWrapper}>
       <h2>Inventory Products</h2>
