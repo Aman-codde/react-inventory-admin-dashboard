@@ -1,6 +1,6 @@
-import styles from './ProductList.module.css';
-import common from '../styles/common.module.css';
-import React, { useState, useMemo,useEffect } from "react";
+import styles from "./ProductList.module.css";
+import common from "../styles/common.module.css";
+import React, { useState, useMemo, useEffect } from "react";
 import useProducts from "../hooks/useProducts";
 
 const ProductList = () => {
@@ -9,7 +9,7 @@ const ProductList = () => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [productList, setProductList] = useState([]);
   const [editingProductId, setEditingProductId] = useState(null);
-  const [editForm, setEditForm] = useState({name: '', price: '', stock: ''});
+  const [editForm, setEditForm] = useState({ name: "", price: "", stock: "" });
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
@@ -56,45 +56,45 @@ const ProductList = () => {
     setEditForm({
       name: product.name,
       price: product.price,
-      stock: product.stock
-    })
-  }
+      stock: product.stock,
+    });
+  };
 
   const handleEditChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
 
     setEditForm((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const saveEdit = (id) => {
-    if(!editForm.name || !editForm.price || !editForm.stock){
+    if (!editForm.name || !editForm.price || !editForm.stock) {
       alert("Please fill in all fields.");
       return;
     }
 
-    setProductList((prev) => 
-      prev.map((product) => 
-        product.id === id 
+    setProductList((prev) =>
+      prev.map((product) =>
+        product.id === id
           ? {
-            ...product, 
-            name: editForm.name,
-            price: Number(editForm.price),
-            stock: Number(editForm.stock),
-          } 
+              ...product,
+              name: editForm.name,
+              price: Number(editForm.price),
+              stock: Number(editForm.stock),
+            }
           : product
       )
     );
     setEditingProductId(null);
-    setEditForm({name: "", price: "", stock: ""})
-  }
+    setEditForm({ name: "", price: "", stock: "" });
+  };
 
   const cancelEdit = () => {
     setEditingProductId(null);
-    setEditForm({ name: "", price: "", stock: ""});
-  }
+    setEditForm({ name: "", price: "", stock: "" });
+  };
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5; // Display 5 items per page
@@ -106,7 +106,8 @@ const ProductList = () => {
   useEffect(() => {
     if (currentPage > totalPages && totalPages > 0) {
       setCurrentPage(1);
-    } else if (totalPages === 0 && products.length > 0) { // Products exist but filter yields no results
+    } else if (totalPages === 0 && products.length > 0) {
+      // Products exist but filter yields no results
       setCurrentPage(1); // Or handle as "no results found" more explicitly if needed
     }
   }, [sortedProducts, totalPages, currentPage, products.length]);
@@ -124,6 +125,36 @@ const ProductList = () => {
 
   const handlePreviousPage = () => {
     setCurrentPage((prev) => Math.max(prev - 1, 1));
+  };
+
+// Add this handler function to your component (place it near your other handlers)
+ const handleTableClick = (e) => {
+    const button = e.target.closest("button");
+    if (!button) return;
+
+    const action = button.dataset.action;
+    const row = button.closest("tr");
+    const productId = row?.dataset.id;
+    const id = Number(productId); 
+    const product = productList.find((p) => p.id === id);
+    if (!product) return;
+
+    switch (action) {
+      case "edit":
+        startEditing(product);
+        break;
+      case "delete":
+        handleDelete(id);
+        break;
+      case "save":
+        saveEdit(id);
+        break;
+      case "cancel":
+        cancelEdit();
+        break;
+      default:
+        break;
+    }
   };
 
   if (loading) {
@@ -185,81 +216,85 @@ const ProductList = () => {
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody onClick={handleTableClick}>
           {paginatedProducts.length > 0 ? (
             paginatedProducts.map((product) => (
-              <tr key={product.id}>
+              <tr key={product.id} data-id={product.id}>
                 <td>
-                {editingProductId === product.id ? ( 
-                  <input
-                    type='text'
-                    name='name'
-                    value={editForm.name}
-                    onChange={handleEditChange}
-                    className={common.formInput}
-                  />
-                ): (
-                  product.name
-                  )} 
+                  {editingProductId === product.id ? (
+                    <input
+                      type="text"
+                      name="name"
+                      value={editForm.name}
+                      onChange={handleEditChange}
+                      className={common.formInput}
+                    />
+                  ) : (
+                    product.name
+                  )}
                 </td>
                 <td>
                   {editingProductId === product.id ? (
                     <input
-                      type='number'
-                      name='price'
+                      type="number"
+                      name="price"
                       value={editForm.price}
                       onChange={handleEditChange}
                       className={common.formInput}
                     />
-                  ):(
+                  ) : (
                     product.price
                   )}
                 </td>
                 <td>
                   {editingProductId === product.id ? (
                     <input
-                      type='number'
-                      name='stock'
+                      type="number"
+                      name="stock"
                       value={editForm.stock}
                       onChange={handleEditChange}
                       className={common.formInput}
                     />
-                  ):(
+                  ) : (
                     product.stock
                   )}
                 </td>
                 <td>
                   {editingProductId === product.id ? (
                     <>
-                    <button
-                      className={`${common.primaryButton}`}
-                      onClick={() => saveEdit(product.id)}
-                    >
-                      Save
-                    </button>
-                    <button 
-                      onClick={cancelEdit}
-                      className={`${common.primaryButton}`}
-                    >
-                      Cancel
-                    </button>
+                      <button
+                        className={`${common.primaryButton}`}
+                        // onClick={() => saveEdit(product.id)}
+                        data-action="save"
+                      >
+                        Save
+                      </button>
+                      <button
+                        // onClick={cancelEdit}
+                        className={`${common.primaryButton}`}
+                        data-action="cancel"
+                      >
+                        Cancel
+                      </button>
                     </>
                   ) : (
-                  <>
-                    <button
-                      className={`${common.primaryButton}`}
-                      onClick={() => startEditing(product)}
-                    >
-                      Edit
-                    </button>
-                    <button onClick={() => handleDelete(product.id)}
-                      className={`${common.primaryButton}`}
-                    >
-                      Delete
-                    </button>
-                  </>
+                    <>
+                      <button
+                        className={`${common.primaryButton}`}
+                        data-action="edit"
+                        // onClick={() => startEditing(product)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        // onClick={() => handleDelete(product.id)}
+                        className={`${common.primaryButton}`}
+                        data-action="delete"
+                      >
+                        Delete
+                      </button>
+                    </>
                   )}
-                  
                 </td>
               </tr>
             ))
@@ -280,7 +315,9 @@ const ProductList = () => {
         >
           Previous
         </button>
-        <span style={{ margin: "0 0.5rem" }}> {/* Added margin for spacing */}
+        <span style={{ margin: "0 0.5rem" }}>
+          {" "}
+          {/* Added margin for spacing */}
           Page {currentPage} of {totalPages > 0 ? totalPages : 1}
         </span>
         <button
