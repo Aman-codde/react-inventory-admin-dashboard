@@ -70,3 +70,12 @@
     background-color: var(--color-primary-bg);
     color: white;
   }
+
+  /* Parent wrapper for cards */
+  .summaryCard {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
