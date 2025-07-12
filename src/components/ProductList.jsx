@@ -2,6 +2,7 @@ import styles from "./ProductList.module.css";
 import common from "../styles/common.module.css";
 import React, { useState, useMemo, useEffect } from "react";
 import useProducts from "../hooks/useProducts";
+import InventorySummaryCards from './InventorySummaryCards';
 
 const ProductList = () => {
   const { products, loading, error } = useProducts();
@@ -175,7 +176,7 @@ const ProductList = () => {
 
   return (
     <div className={common.cardWrapper}>
-      <h2>Inventory Products</h2>
+      <InventorySummaryCards products={productList} loading={loading}/>
 
       <div className={styles.controls}>
         <input
