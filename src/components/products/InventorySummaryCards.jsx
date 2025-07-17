@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import SummaryCard from "./SummaryCard";
-import common from "../styles/common.module.css";
+import common from "../../styles/common.module.css";
 
 const InventorySummaryCards = ({products=[], loading}) => {
     const summary = useMemo(() => {
