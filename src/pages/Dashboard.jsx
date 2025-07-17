@@ -1,7 +1,7 @@
 import { useState } from "react";
-import ProductList from "../components/ProductList";
+import ProductList from "../components/products/ProductList";
 import Sidebar from "../components/Sidebar";
-import AddProductForm from "../components/AddProductForm";
+import AddProductForm from "../components/products/AddProductForm";
 import ChartView from "../components/ChartView";
 import styles from './Dashboard.module.css';
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./AddProductForm.module.css";
-import common from '../styles/common.module.css';
+import common from '../../styles/common.module.css';
 
 const AddProductForm = () => {
   const [formData, setformData] = useState({
