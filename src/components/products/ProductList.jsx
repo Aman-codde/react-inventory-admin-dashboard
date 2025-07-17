@@ -8,6 +8,7 @@ import Pagination from "./Pagination";
 import Loading from "../ui/Loading";
 import ErrorMessage from "../ui/ErrorMessage";
 import filterAndSortProducts from "../../utils/filterAndSortProducts";
+import { exportProductsCSV } from "../../utils/exportCSV";
 
 const ProductList = () => {
   const { products, loading, error } = useProducts();
@@ -168,6 +169,11 @@ const ProductList = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className={`${common.formInput} ${styles.flexGrow}`}
         />
+
+        <button 
+          onClick={() => exportProductsCSV(finalProducts)}
+          className={common.primaryButton}
+        >Export to CSV</button>
 
         <select
           value={sortOrder}
