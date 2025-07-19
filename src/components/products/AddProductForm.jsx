@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./AddProductForm.module.css";
 import common from '../../styles/common.module.css';
+import toast from "react-hot-toast";
 
 const AddProductForm = () => {
   const [formData, setformData] = useState({
@@ -18,8 +19,7 @@ const AddProductForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    alert("Your Data Is Submitted Successfully!");
+    toast.success("Product Is Added Successfully!")
   };
 
   return (
@@ -28,7 +28,6 @@ const AddProductForm = () => {
       <form onSubmit={handleSubmit} className={styles.formWrapper}>
         <input
           className={common.formInput}
-          no
           type="text"
           name="name"
           placeholder="Name"
