@@ -9,6 +9,7 @@ import Loading from "../ui/Loading";
 import ErrorMessage from "../ui/ErrorMessage";
 import filterAndSortProducts from "../../utils/filterAndSortProducts";
 import { exportProductsCSV } from "../../utils/exportCSV";
+import toast from "react-hot-toast";
 
 const ProductList = () => {
   const { products, loading, error } = useProducts();
@@ -36,6 +37,7 @@ const ProductList = () => {
     );
     if (confirmDelete) {
       setProductList((prev) => prev.filter((p) => p.id !== id));
+      toast.success("Product Deleted Successfully")
     }
   };
 
@@ -67,7 +69,7 @@ const ProductList = () => {
 
   const saveEdit = (id) => {
     if (!editForm.name || !editForm.price || !editForm.stock) {
-      alert("Please fill in all fields.");
+      toast.error("Please fill in all fields.")
       return;
     }
 
@@ -83,6 +85,7 @@ const ProductList = () => {
           : product
       )
     );
+    toast.success("Product Updated Successfully");
     setEditingProductId(null);
     setEditForm({ name: "", price: "", stock: "" });
   };
