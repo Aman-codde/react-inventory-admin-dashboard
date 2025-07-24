@@ -9,7 +9,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import useProducts from "../hooks/useProducts";
+import useProducts from "../../hooks/useProducts";
 
 const LineChart = () => {
   const { products } = useProducts();

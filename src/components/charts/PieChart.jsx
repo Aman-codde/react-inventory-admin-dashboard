@@ -7,7 +7,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import useProducts from "../hooks/useProducts";
+import useProducts from "../../hooks/useProducts";
 const COLORS = [
   "#0088FE",
   "#00C49F",

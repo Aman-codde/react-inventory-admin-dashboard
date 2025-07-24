@@ -4,7 +4,6 @@ const Sidebar = ({setView,currentView}) => {
     const menuItems = [
         { label: 'Products', key: 'products'},
         { label: 'Add Product', key: 'add'},
-        { label: 'Charts', key: 'charts'}
     ]
 
     return (
