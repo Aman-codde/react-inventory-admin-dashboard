@@ -9,10 +9,10 @@ import {
   Cell,
   ResponsiveContainer,
 } from "recharts";
-import useProducts from "../hooks/useProducts";
+import useProducts from "../../hooks/useProducts";
 
 const LOW_STOCK_THRESHOLD = 2000;
-const ChartView = () => {
+const BarChart = () => {
   const { products } = useProducts();
 
   return (
@@ -36,4 +36,4 @@ const ChartView = () => {
   </ResponsiveContainer>
 );
 }
-export default ChartView;
+export default BarChart;

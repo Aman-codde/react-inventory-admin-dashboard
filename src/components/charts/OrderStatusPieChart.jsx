@@ -7,7 +7,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import useProducts from "../hooks/useProducts";
+import orders from "../../data/orders";
+
 const COLORS = [
   "#0088FE",
   "#00C49F",
@@ -19,23 +20,31 @@ const COLORS = [
   "#775DD0",
 ];
 
-const PieChart = () => {
-  const { products } = useProducts();
+const OrderStatusPieChart = () => {
+  const orders_count = orders.reduce((acc, order) => {
+    acc[order.status] = (acc[order.status] || 0) + 1;
+    return acc;
+  }, {})
+
+  const status_data = Object.entries(orders_count).map(([status, value]) => ({
+    name: status, 
+    value
+  }))
 
   return (
     <ResponsiveContainer width="100%" height={360}>
       <ReactPieChart>
         <Pie
-          data={products}
+          data={status_data}
           cx="50%"
           cy="50%"
           outerRadius={100}
           fill="#8884d8"
-          dataKey="stock"
-          nameKey={name}
+          dataKey="value"
+          nameKey="name"
           label
         >
-          {products.map((entry, index) => (
+          {status_data.map((entry, index) => (
             <Cell key={index} fill={COLORS[index % COLORS.length]}></Cell>
           ))}
         </Pie>
@@ -45,4 +54,4 @@ const PieChart = () => {
     </ResponsiveContainer>
   );
 };
-export default PieChart;
+export default OrderStatusPieChart;
